@@ -48,4 +48,17 @@ class loginController{
     }
 }
 
+const caja = [];
+
+function user(){
+   const upDate = async (req,res) => {
+       try{
+          res.status(202).send('usuario creado');
+       }
+       catch(e){
+          res.status(500).send('no funciona')
+       }
+   }
+}
+
 module.exports = loginController;
