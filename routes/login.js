@@ -1,6 +1,6 @@
-const LoginController = require('../controllers/loginController');
+import LoginController from '../controllers/loginController.js';
 //const userController = require('../controllers/loginController');
-const express = require('express');
+import express from 'express';
 
 const routes = express.Router();
 const loginController = new LoginController();
@@ -12,4 +12,4 @@ routes.post('/:id', loginController.create); // crear un usuario
 routes.delete('/:id', loginController.delete); // eliminar los registros */
 //routes.put('/:id',userController.upDate);
 
-module.exports = routes;
+export default routes;

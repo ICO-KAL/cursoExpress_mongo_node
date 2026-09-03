@@ -1,4 +1,4 @@
-const caja = [];
+import models from '../models/models.js';
 
 class loginController{
     constructor(){
@@ -7,7 +7,6 @@ class loginController{
 
    async upDate(req, res){
          try{
-            const buscar = await caja.find((p));
             res.status(202).send('todo funciona correctamente en upDate');
          }
          catch(e){
@@ -17,7 +16,8 @@ class loginController{
 
    async create(req, res){
            try{
-            res.status(202).send('todo funciona correctamente en create');
+            const insert = models.create(req.body);
+            res.status(202).json({message: 'usuario creado'},insert);
          }
          catch(e){
             res.status(500).send('no funciona correctamente tienes que intentar de nuevo');
@@ -50,7 +50,7 @@ class loginController{
          }
     }
 }
-module.exports = loginController;
+export default loginController;
 
 /* const caja = [];
 

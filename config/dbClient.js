@@ -1,22 +1,30 @@
-require('dotenv').config();
-const {MongoClient} = require('mongodb');
-const client = new MongoClient();
-const url = `mongodb+srv://${process.env.userDB}:${process.env.passwoardDB}@${process.env.conection_DATABASE}/?appName=practicas`;
+import dotenv from 'dotenv';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import {MongoClient} from 'mongodb';
 
 class dbClientConections {
-    constructor(){
-
-    }
+        constructor(){
+            const __filename = fileURLToPath(import.meta.url);
+            const __dirname = path.dirname(__filename);
+            const envPath = path.join(__dirname, '..', '.env');
+            dotenv.config({path: envPath}); 
+             this.url = `mongodb+srv://${process.env.userDB}:${process.env.passwoardDB}@${process.env.conectionDB}/?appName=practicas`;
+             this.client = new MongoClient(this.url);
+             this.dbClientConection();
+        }
     async dbClientConection(){
-    try{
-        const conection = await client.connect(url); 
-        conection.db('practicaMongo'); // nombre de la base de datos
-        console.log('base de datos conectada');
-    }
-    catch(e){
-        console.log(e)
+            try{
+                await this.client.connect(); 
+                this.connect = this.client.db('practicaMongo');
+                console.log('base de datos conectada');
+            }
+            catch(e){
+                console.log('un error por esto',e)
+            }
+            finally{
+                this.client.close();
+            }
     }
 }
-}
-
-module.exports = dbClientConections;
+export default new dbClientConections();

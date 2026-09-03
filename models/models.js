@@ -1,9 +1,10 @@
-const dbClientConections = require('../config/dbClient');
-const conection = new dbClientConections();
+import dbClientConections from '../config/dbClient.js';
 
-async function model(){
-     
-    const create = (req,res) =>{
-         const upDate = conection.()
+export default new class login {
+    constructor(){}
+
+    async create(user) {
+        const read = dbClientConections.connect.collection('practicaMongo');
+        const create = read.insertOne(user)
     }
 }
