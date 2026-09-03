@@ -1,10 +1,13 @@
+const caja = [];
+
 class loginController{
     constructor(){
-
+    
     }
 
    async upDate(req, res){
          try{
+            const buscar = await caja.find((p));
             res.status(202).send('todo funciona correctamente en upDate');
          }
          catch(e){
@@ -47,8 +50,9 @@ class loginController{
          }
     }
 }
+module.exports = loginController;
 
-const caja = [];
+/* const caja = [];
 
 function user(){
    const upDate = async (req,res) => {
@@ -59,6 +63,4 @@ function user(){
           res.status(500).send('no funciona')
        }
    }
-}
-
-module.exports = loginController;
+} */  // esto solo es una prueba
