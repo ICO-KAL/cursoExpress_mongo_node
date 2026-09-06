@@ -1,8 +1,9 @@
-require('dotenv').config();
-const express = require('express');
+import dotenv from 'dotenv';
+import express from 'express';
+import routes from './routes/login.js';
 
 const app = express();
-const login = require('./routes/login');
+const login = routes;
 
 // configuraciones
 //app.set('view-routes', path.join(__dirname, 'routes'));
