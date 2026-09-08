@@ -11,19 +11,19 @@ class dbClientConections {
             dotenv.config({path: envPath}); 
              this.url = `mongodb+srv://${process.env.userDB}:${process.env.passwoardDB}@${process.env.conectionDB}/?appName=practicas`;
              this.client = new MongoClient(this.url);
-             this.dbClientConection();
+             this.connect = null;
+             this.ready = this.dbClientConection();
         }
     async dbClientConection(){
             try{
                 await this.client.connect(); 
                 this.connect = this.client.db('practicaMongo');
                 console.log('base de datos conectada');
+                return this.connect;
             }
             catch(e){
-                console.log('un error por esto',e)
-            }
-            finally{
-                this.client.close();
+                console.log('un error por esto',e);
+                throw e;
             }
     }
 }

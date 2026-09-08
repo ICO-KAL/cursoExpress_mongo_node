@@ -7,6 +7,8 @@ class loginController{
 
    async upDate(req, res){
          try{
+            const {id} = req.params;
+            const updata = await models.upDate(id);
             res.status(202).send('todo funciona correctamente en upDate');
          }
          catch(e){
@@ -16,17 +18,20 @@ class loginController{
 
    async create(req, res){
            try{
-            const insert = models.create(req.body);
+            const insert = await models.create(req.body);
             res.status(202).json({message: 'usuario creado'},insert);
          }
          catch(e){
-            res.status(500).send('no funciona correctamente tienes que intentar de nuevo');
+            res.status(500).send('El Error es este');
+            console.log(e)
          }
     }
     
    async delete(req, res){
            try{
-            res.status(202).send('todo funciona correctamente en delete');
+            const {id} = req.params;
+            const eliminar = await models.delete(id);
+            res.status(202).send(eliminar);
          }
          catch(e){
             res.status(500).send('no funciona correctamente tienes que intentar de nuevo');
@@ -35,7 +40,8 @@ class loginController{
 
    async getAll(req, res){
         try{
-            res.status(202).send('todo funciona correctamente en getAll');
+            const data  = await models.getAll();
+            res.status(202).json(data);
          }
          catch(e){
             res.status(500).send('no funciona correctamente tienes que intentar de nuevo');
@@ -43,7 +49,9 @@ class loginController{
     }
    async getOne(req, res){
         try{
-            res.status(202).send('todo funciona correctamente en getOne');
+            const {id} = req.params;
+            const data  = await models.getOne(id);
+            res.status(202).json(data);
          }
          catch(e){
             res.status(500).send('no funciona correctamente tienes que intentar de nuevo');

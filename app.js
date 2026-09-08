@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import routes from './routes/login.js';
+import bodyParser from 'body-parser';
 
 const app = express();
 const login = routes;
@@ -9,6 +10,9 @@ const login = routes;
 //app.set('view-routes', path.join(__dirname, 'routes'));
 
 // middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/login',login);
 //puerto
 const PORT = process.env.PORT;
