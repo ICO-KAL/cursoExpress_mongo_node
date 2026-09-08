@@ -55,3 +55,19 @@ se aprendio hacer un crud que tiene que ver con lo siguiente
  ten encuenta que leer la ruta del archivo se usa path ver la ruta se usa url entendido ya con esto todo ira bien 
  ahora se aprendio implementar un create en el controller y cuando el usuario crea un archivo pasa por models
  para crear ese archivo de manera "limpia" pero eso seria.
+
+ # lo que se aprendio
+  
+
+se aprendio hacer un crud en mongo hay algunas implementaciones que se aprendieron como cuales
+el insertOne() // esto permite que insertar datos
+el upDateOne()// actualizar los datos
+el deleteOne() // eliminar
+el find() // es mirar todos los registros
+el findOne() // esto permite mirar todos los registros existentes
+
+tienes que mirar el loginController.js para ver como se implemento en los controladores
+tambien mira el modls para que veas como se implemento cada cosa al pie de la letra
+
+// lo que se tiene que hacer es lo siguiente
+corregir los errores que hay en el codigo porque no presenta los datos en la api de thunder clain entre otros
