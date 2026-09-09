@@ -9,22 +9,23 @@ export default new class dbClientConections {
         }
 
         async conectionDB(){
-            const __filename = fileURLToPath(import.meta.url);
-            const __dirname = path.dirname(__filename);
-            const envPath = path.join(__dirname, '..', '.env');
-            dotenv.config({path: envPath});
             try{
+                const __filename = fileURLToPath(import.meta.url);
+                const __dirname = path.dirname(__filename);
+                const envPath = path.join(__dirname, '..', '.env');
+                dotenv.config({path: envPath});
              this.url = `mongodb+srv://${process.env.userDB}:${process.env.passwoardDB}@${process.env.conectionDB}/?appName=practicas`;
              await mongoose.connect(this.url); 
              this.connect = null;
+             console.log('base de datos conectada..');
             } catch(e){
-                console.log(e);
+                console.log('Error por este motivo',e);
             }
         }
         async cerrar(){
             try{
-                await mongoose.disconnect();
-                return "conexion terminada";
+                console.log("base de datos desconectada");
+                this.desconectar = await mongoose.disconnect();
             }catch(e){
                 console.log(e);
             }

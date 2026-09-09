@@ -17,9 +17,6 @@ export default new class login {
     
     async delete(id){
         return await User.findOneAndDelete(id); 
-        /*
-          (async (id)=> {await read.deleteOne({_id: new ObjectId(id)}); return id;}) 
-         */
     }
     async upDate(id,user){
        return await User.findOneAndUpdate(id,user, {new: true});

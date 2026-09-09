@@ -14,5 +14,6 @@ const userSchemas = new mongoose.Schema({
     type: Boolean,
     default: false
   }
-});
+},{strict: 'throw'});
+
 export default mongoose.model('userSchemas', userSchemas);

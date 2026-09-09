@@ -20,7 +20,7 @@ const PORT = process.env.PORT;
 app.listen(PORT,()=> console.log('El servidor esta arrancando en: ' + PORT));
 
 process.on('SIGABRT', async () =>{
-   dbClient.cerrar(),
-   process.exit(0);
+   await dbClient.cerrar(),
+   await process.exit(0);
 });
     
