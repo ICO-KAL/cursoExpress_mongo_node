@@ -1,6 +1,6 @@
 import models from '../models/models.js';
 
-class loginController{
+export default class loginController{
     constructor(){
     
     }
@@ -18,12 +18,13 @@ class loginController{
 
    async create(req, res){
            try{
-            const insert = await models.create(req.body);
+            const body = req.body;
+            const insert = await models.create(body);
             res.status(202).json({message: 'usuario creado'},insert);
          }
          catch(e){
             res.status(500).send('El Error es este');
-            console.log(e)
+            console.log(e);
          }
     }
     
@@ -58,7 +59,7 @@ class loginController{
          }
     }
 }
-export default loginController;
+
 
 /* const caja = [];
 
