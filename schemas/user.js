@@ -8,11 +8,21 @@ const userSchemas = new mongoose.Schema({
   },
   passwoard: {
     type: Number,
-    required: true
+    required: true,
+    min: [8, 'debe de tener al menos 8 caracteres'],
+    max:[30, 'no puede tener mas caracteres'],
+    function(){
+      // funcion por si no te convence algo para hacer una validacion de eso
+    }
   },
   active: {
     type: Boolean,
-    default: false
+    default: false,
+    isTrue(){
+      if(!isActive){
+        return'no esta activo el usuario';
+      }
+    }
   }
 },{strict: 'throw'});
 

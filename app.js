@@ -16,8 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/login',login);
 //puerto
-const PORT = process.env.PORT;
-app.listen(PORT,()=> console.log('El servidor esta arrancando en: ' + PORT));
+try{
+   const PORT = process.env.PORT;
+   app.listen(PORT,()=> console.log('El servidor esta arrancando en: ' + PORT));
+}catch(e){
+   console.log(e);
+}
+
 
 process.on('SIGABRT', async () =>{
    await dbClient.cerrar(),
