@@ -1,63 +1,47 @@
 import models from '../models/models.js';
+import bcrypt from 'bcryptjs';
 
-export default class loginController{
-    constructor(){
+export default new class loginController{
+   constructor(){
+   }
+
+   async register(req, res){
+      try{
+         const {name,passwoard,email} = req.body;
+            
+         const read = await models.getOne({email});
+         if(read) return res.status(400).json({error: 'usuario existente'});
+   
+         const encrytar = await bcrypt.hash(passwoard, 6);
+         const createUser = await models.create({
+            nombre: name,
+            email,
+            passwoard: encrytar
+         });
+         res.status(202).json({
+            message: 'usuario creado',
+            createUser
+         });
+      }
+      catch(e){
+          console.log(e);
+      }
+   }
+   async login(req,res){
+      try{
+         const {email,passwoard} = req.body;
+         const read = await models.getOne({email});
+
+         if(!read) res.status(400).json({error: "usuario existente"});
+
+         const nose = await bcrypt.compare(passwoard,read.passwoard);
+         res.status(200).json({message: "Bienvenido"});
+      }
+      catch(e){
+          console.log(e);
+      }
+   }
     
-    }
-
-   async upDate(req, res){
-         try{
-            const {id} = req.params;
-            const updata = await models.upDate(id);
-            res.status(202).send('todo funciona correctamente en upDate');
-         }
-         catch(e){
-            res.status(500).send('no funciona correctamente tienes que intentar de nuevo');
-         }
-    }
-
-   async create(req, res){
-           try{
-            const body = req.body;
-            const insert = await models.create(body);
-            res.status(202).json({message: 'usuario creado'},insert);
-         }
-         catch(e){
-            res.status(500).send('El Error es este');
-            console.log(e);
-         }
-    }
-    
-   async delete(req, res){
-           try{
-            const {id} = req.params;
-            const eliminar = await models.delete(id);
-            res.status(202).send(eliminar);
-         }
-         catch(e){
-            res.status(500).send('no funciona correctamente tienes que intentar de nuevo');
-         }
-    }
-
-   async getAll(req, res){
-        try{
-            const data  = await models.getAll();
-            res.status(202).json(data);
-         }
-         catch(e){
-            res.status(500).send('no funciona correctamente tienes que intentar de nuevo');
-         }
-    }
-   async getOne(req, res){
-        try{
-            const {id} = req.params;
-            const data  = await models.getOne(id);
-            res.status(202).json(data);
-         }
-         catch(e){
-            res.status(500).send('no funciona correctamente tienes que intentar de nuevo');
-         }
-    }
 }
 
 

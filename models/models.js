@@ -12,8 +12,12 @@ export default new class login {
        return await User.find()
     }
 
-    async getOne(id){
-        return await User.findById(id);
+    async getOne(filter){
+        return await User.findOne(filter);
+    }
+
+    async getById(id){
+        return await User.findById({_id: id});
     }
     
     async delete(id){

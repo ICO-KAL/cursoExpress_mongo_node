@@ -16,7 +16,6 @@ export default new class dbClientConections {
                 dotenv.config({path: envPath});
              this.url = `mongodb+srv://${process.env.userDB}:${process.env.passwoardDB}@${process.env.conectionDB}/?appName=practicas`;
              await mongoose.connect(this.url); 
-             this.connect = null;
              console.log('base de datos conectada..');
             } catch(e){
                 console.log('Error por este motivo',e);
@@ -26,6 +25,7 @@ export default new class dbClientConections {
             try{
                 console.log("base de datos desconectada");
                 this.desconectar = await mongoose.disconnect();
+                return this.desconectar;
             }catch(e){
                 console.log(e);
             }

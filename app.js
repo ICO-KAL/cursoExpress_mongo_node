@@ -21,11 +21,10 @@ try{
    app.listen(PORT,()=> console.log('El servidor esta arrancando en: ' + PORT));
 }catch(e){
    console.log(e);
+   process.on('SIGABRT', async () =>{
+      await dbClient.cerrar(),
+      await process.exit(0);
+   });
 }
 
-
-process.on('SIGABRT', async () =>{
-   await dbClient.cerrar(),
-   await process.exit(0);
-});
     
