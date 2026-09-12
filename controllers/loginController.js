@@ -1,4 +1,5 @@
-import models from '../models/models.js';
+import models from '../models/userModels.js';
+import autentic from '../helpers/autentic.js'
 import bcrypt from 'bcryptjs';
 
 export default new class loginController{
@@ -32,10 +33,12 @@ export default new class loginController{
          const {email,passwoard} = req.body;
          const read = await models.getOne({email});
 
-         if(!read) res.status(400).json({error: "usuario existente"});
+         if(!read) return res.status(400).json({error: "usuario existente"});
 
          const nose = await bcrypt.compare(passwoard,read.passwoard);
-         res.status(200).json({message: "Bienvenido"});
+         const toke = await autentic(email);
+
+         res.status(200).json({message: "Bienvenido", token: toke});
       }
       catch(e){
           console.log(e);
