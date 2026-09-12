@@ -1,24 +1,23 @@
 import dotenv from 'dotenv';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import url from 'node:url';
 import mongoose from 'mongoose';
 
 export default new class dbClientConections {
         constructor(){
             this.conectionDB();
+            this.cerrar();
         }
 
         async conectionDB(){
             try{
-                const __filename = fileURLToPath(import.meta.url);
-                const __dirname = path.dirname(__filename);
-                const envPath = path.join(__dirname, '..', '.env');
-                dotenv.config({path: envPath});
-             this.url = `mongodb+srv://${process.env.userDB}:${process.env.passwoardDB}@${process.env.conectionDB}/?appName=practicas`;
+             dotenv.config({ path: new URL('../.env', import.meta.url) });
+             this.url = await `mongodb+srv://${process.env.userDB}:${process.env.passwoardDB}@${process.env.conectionDB}/?appName=practicas`;
              await mongoose.connect(this.url); 
              console.log('base de datos conectada..');
             } catch(e){
                 console.log('Error por este motivo',e);
+
             }
         }
         async cerrar(){
