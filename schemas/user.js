@@ -1,7 +1,6 @@
 //const mongoose = require('mongoose');
 import mongoose from 'mongoose';
 
-
 const userSchemas = new mongoose.Schema({
   nombre: {
     type: String,
