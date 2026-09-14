@@ -33,7 +33,7 @@ export default new class loginController{
          const {email,passwoard} = req.body;
          const read = await models.getOne({email});
 
-         if(!read) return res.status(400).json({error: "usuario existente"});
+         if(!read) return res.status(400).json({error: "Usuario no existente"});
 
          const nose = await bcrypt.compare(passwoard,read.passwoard);
          const toke = await autentic(email);
